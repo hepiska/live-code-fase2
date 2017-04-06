@@ -17,6 +17,7 @@ router.put('/restoran/:id',restoranCon.update);
 
 router.post('/addmenu',restoranCon.addmenu);
 router.post('/removemenu',restoranCon.removemenu);
+router.get('/showmenu/:id',restoranCon.showmenu)
 
 
 module.exports=router

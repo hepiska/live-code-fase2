@@ -119,18 +119,25 @@ removemenu:function(req,res){
           }
         }
       })
-      console.log(data.menulist);
+      //console.log(data.menulist);
       data.save(function (err, data) {
            if (err) {
                res.status(500).send(err)
            }
            res.send('update success');
        });
-
     }
   })
 
-
-
+},
+showmenu:function(req,res){
+  Restoran.findById(
+    req.params.id
+  ).populate('menulist')
+    .exec(function(err,menu){
+      res.send(menu)
+    })
 }
+
+
 }
