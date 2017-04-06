@@ -70,7 +70,67 @@ update:function(req,res){
        });
     }
   })
+},
+
+addmenu:function(req,res){
+  let resto_id=req.body.restoran_id;
+  let food_ids=req.body.food_id.split(',');
+  //console.log(food_id);
+  food_ids.forEach(function(food_id){
+    Restoran.findByIdAndUpdate(resto_id,{
+      $push:{menulist:food_id}},
+      {safe:true,upsert:true,new:true},
+    function(err,data){
+       if (err) {
+         //console.log(err);
+       } else {
+         //console.log(data);
+       }
+    })
+  })
+
+  Restoran.findOne({
+    _id:resto_id
+  },function(err,data){
+    if (err) {
+      res.send(err)
+    } else {
+      res.send(data)
+    }
+  })
+
+},
+
+removemenu:function(req,res){
+  let resto_id=req.body.restoran_id;
+  let food_ids=req.body.food_id.split(',');
+
+  Restoran.findOne({
+    _id:resto_id
+  },function(err,data){
+    if (err) {
+      res.send(err)
+    } else {
+      food_ids.forEach(function(id){
+        console.log(id);
+        for (var i = 0; i < data.menulist.length; i++) {
+          if (data.menulist[i]==id) {
+            data.menulist.splice(i,1);
+          }
+        }
+      })
+      console.log(data.menulist);
+      data.save(function (err, data) {
+           if (err) {
+               res.status(500).send(err)
+           }
+           res.send('update success');
+       });
+
+    }
+  })
+
+
 
 }
-
 }

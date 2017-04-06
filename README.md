@@ -19,7 +19,8 @@ get http://localhost:3000/api/restoran/id
 - update data restorant
 put http://localhost:3000/api/restoran/id
 
-### insert data food
+###food
+- insert data food
 post http://localhost:3000/api/food
 - get data semua food
 get http://localhost:3000/api/food
@@ -27,8 +28,9 @@ get http://localhost:3000/api/food
 delete http://localhost:3000/api/food/id
 - get data satu food
 get http://localhost:3000/api/food/id
-- update data foodt
+- update data food
 put http://localhost:3000/api/food/id
 
-### make food to restoran menu
+### food to restoran menu
+- addmenu
 post http://localhost:3000/api/addmenu
